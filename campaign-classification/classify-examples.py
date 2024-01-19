@@ -13,8 +13,8 @@ def classify_examples():
     """
     print("Loading examples")
     examples = load_examples()
-    classifier = load_pickle('classifier.pkl')
-    vectorizer = load_pickle('vectorizer.pkl')
+    classifier = load_pickle('model/classifier.pkl')
+    vectorizer = load_pickle('model/vectorizer.pkl')
     
     for (name, doc) in examples.items():
         features = vectorizer.transform([tokenize_and_stem(doc)])

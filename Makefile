@@ -4,12 +4,19 @@ prepare-examples:
 		tar -xf data.tar ; \
 		rm data.tar ; \
 	else \
-		echo "The directory data already exists."; \
+		echo "The directory data already exists. Nothing left to do here 🦥 "; \
 	fi
 
+download-poetry:
+	@curl -sSL https://install.python-poetry.org | python3 -
 
-run-train:
-	METAFLOW_PROFILE=private python train-model.py run
+poetry-install:
+	poetry install --no-root
 
-classify-examples:
-	python classify-examples.py
+install: download-poetry 
+
+run-train: prepare-examples
+	poetry run python campaign-classification/train-model.py run
+
+run-classify:
+	poetry run python campaign-classification/classify-examples.py

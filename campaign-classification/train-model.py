@@ -61,12 +61,12 @@ class ArticleClassifier(FlowSpec):
     @step
     def persist(self):
         # safe the classifier:
-        model_filename = 'classifier.pkl'
+        model_filename = 'model/classifier.pkl'
         with open(model_filename, 'wb') as file:
             pickle.dump(self.classifier, file)
             
-        # safe the vecorizer:
-        model_filename = 'vecorizer.pkl'
+        # safe the vectorizer:
+        model_filename = 'model/vectorizer.pkl'
         with open(model_filename, 'wb') as file:
             pickle.dump(self.vectorizer, file)
             
