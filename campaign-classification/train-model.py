@@ -53,7 +53,7 @@ class ArticleClassifier(FlowSpec):
         
     @step 
     def train_classifier(self):
-        self.classifier = SVC(kernel='linear')
+        self.classifier = SVC(kernel='linear', probability=True, class_weight='balanced')
         X_train, self.X_test, y_train, self.y_test = train_test_split(self.tokenized_articles, self.categories, test_size=0.2, random_state=240480)
         self.classifier.fit(X_train, y_train)
         self.next(self.persist)
