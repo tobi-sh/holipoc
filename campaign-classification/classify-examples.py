@@ -15,10 +15,12 @@ def classify_examples():
     examples = load_examples()
     classifier = load_pickle('model/classifier.pkl')
     vectorizer = load_pickle('model/vectorizer.pkl')
-    
+    categories = classifier.classes_
     for (name, doc) in examples.items():
         features = vectorizer.transform([tokenize_and_stem(doc)])
+        probs = classifier.predict_proba(features)[0]
         print(f'{name} => {classifier.predict(features)}')
+        print(f'''\tLikelihood: {[f'{categories[i]} =>  {p*100:.2f}%' for (i,p) in enumerate(probs)]}\n''')
 
 
 def load_pickle(filename):
